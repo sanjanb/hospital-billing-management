@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients - Hospital Billing System</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Hospital Billing System</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/patients">Patients</a></li>
+          <li><a href="/doctors">Doctors</a></li>
+          <li><a href="/appointments">Appointments</a></li>
+          <li><a href="/bills">Bills</a></li>
+          <li><a href="/payments">Payments</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h2>Patients List</h2>
+
+      <form action="/patients/add" method="POST">
+        <h3>Add New Patient</h3>
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="number" name="age" placeholder="Age" required />
+        <select name="gender" required>
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" name="address" placeholder="Address" required />
+        <input
+          type="text"
+          name="contactNumber"
+          placeholder="Contact Number"
+          required
+        />
+        <input type="submit" value="Add Patient" />
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Contact Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% patients.forEach(patient => { %>
+          <tr>
+            <td><%= patient.PatientID %></td>
+            <td><%= patient.Name %></td>
+            <td><%= patient.Age %></td>
+            <td><%= patient.Gender %></td>
+            <td><%= patient.Address %></td>
+            <td><%= patient.ContactNumber %></td>
+            <td>
+              <a href="/patients/edit/<%= patient.PatientID %>">
+                <button>Edit</button>
+              </a>
+              <a href="/patients/delete/<%= patient.PatientID %>">
+                <button>Delete</button>
+              </a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

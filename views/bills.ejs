@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Manage Bills</title>
+    <link rel="stylesheet" href="/project/public/css/styles.css" />
+  </head>
+  <body>
+    <h1>Manage Bills</h1>
+    <form action="/bills/add" method="POST">
+      <input type="text" name="patientId" placeholder="Patient ID" required />
+      <input
+        type="text"
+        name="appointmentId"
+        placeholder="Appointment ID"
+        required
+      />
+      <input
+        type="number"
+        step="0.01"
+        name="amount"
+        placeholder="Amount"
+        required
+      />
+      <input type="date" name="billingDate" required />
+      <button type="submit">Add Bill</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Patient ID</th>
+          <th>Appointment ID</th>
+          <th>Amount</th>
+          <th>Billing Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bills.forEach(bill => { %>
+        <tr>
+          <td><%= bill.PatientID %></td>
+          <td><%= bill.AppointmentID %></td>
+          <td><%= bill.Amount %></td>
+          <td><%= bill.BillingDate %></td>
+          <td>
+            <form
+              action="/bills/edit/<%= bill.BillID %>"
+              method="POST"
+              style="display: inline"
+            >
+              <input
+                type="text"
+                name="patientId"
+                value="<%= bill.PatientID %>"
+                required
+              />
+              <input
+                type="text"
+                name="appointmentId"
+                value="<%= bill.AppointmentID %>"
+                required
+              />
+              <input
+                type="number"
+                step="0.01"
+                name="amount"
+                value="<%= bill.Amount %>"
+                required
+              />
+              <input
+                type="date"
+                name="billingDate"
+                value="<%= bill.BillingDate %>"
+                required
+              />
+              <button type="submit">Edit</button>
+            </form>
+            <a href="/bills/delete/<%= bill.BillID %>">Delete</a>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>

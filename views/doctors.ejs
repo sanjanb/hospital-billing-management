@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Manage Doctors</title>
+    <link rel="stylesheet" href="/project/public/css/styles.css" />
+  </head>
+  <body>
+    <h1>Manage Doctors</h1>
+    <form action="/doctors/add" method="POST">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="text" name="specialty" placeholder="Specialty" required />
+      <input
+        type="text"
+        name="contactNumber"
+        placeholder="Contact Number"
+        required
+      />
+      <button type="submit">Add Doctor</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Specialty</th>
+          <th>Contact Number</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% doctors.forEach(doctor => { %>
+        <tr>
+          <td><%= doctor.Name %></td>
+          <td><%= doctor.Specialty %></td>
+          <td><%= doctor.ContactNumber %></td>
+          <td>
+            <form
+              action="/doctors/edit/<%= doctor.DoctorID %>"
+              method="POST"
+              style="display: inline"
+            >
+              <input
+                type="text"
+                name="name"
+                value="<%= doctor.Name %>"
+                required
+              />
+              <input
+                type="text"
+                name="specialty"
+                value="<%= doctor.Specialty %>"
+                required
+              />
+              <input
+                type="text"
+                name="contactNumber"
+                value="<%= doctor.ContactNumber %>"
+                required
+              />
+              <button type="submit">Edit</button>
+            </form>
+            <a href="/doctors/delete/<%= doctor.DoctorID %>">Delete</a>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
