@@ -1,74 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Manage Appointments</title>
-    <link rel="stylesheet" href="/project/public/css/styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointments - Hospital Billing System</title>
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <h1>Manage Appointments</h1>
-    <form action="/appointments/add" method="POST">
-      <input type="text" name="patientId" placeholder="Patient ID" required />
-      <input type="text" name="doctorId" placeholder="Doctor ID" required />
-      <input type="date" name="appointmentDate" required />
-      <input type="text" name="reason" placeholder="Reason" required />
-      <button type="submit">Add Appointment</button>
-    </form>
-    <table>
-      <thead>
-        <tr>
-          <th>Patient ID</th>
-          <th>Doctor ID</th>
-          <th>Appointment Date</th>
-          <th>Reason</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% appointments.forEach(appointment => { %>
-        <tr>
-          <td><%= appointment.PatientID %></td>
-          <td><%= appointment.DoctorID %></td>
-          <td><%= appointment.AppointmentDate %></td>
-          <td><%= appointment.Reason %></td>
-          <td>
-            <form
-              action="/appointments/edit/<%= appointment.AppointmentID %>"
-              method="POST"
-              style="display: inline"
-            >
-              <input
-                type="text"
-                name="patientId"
-                value="<%= appointment.PatientID %>"
-                required
-              />
-              <input
-                type="text"
-                name="doctorId"
-                value="<%= appointment.DoctorID %>"
-                required
-              />
-              <input
-                type="date"
-                name="appointmentDate"
-                value="<%= appointment.AppointmentDate %>"
-                required
-              />
-              <input
-                type="text"
-                name="reason"
-                value="<%= appointment.Reason %>"
-                required
-              />
-              <button type="submit">Edit</button>
-            </form>
-            <a href="/appointments/delete/<%= appointment.AppointmentID %>"
-              >Delete</a
-            >
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
+    <header>
+      <h1>Hospital Billing System</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/patients">Patients</a></li>
+          <li><a href="/doctors">Doctors</a></li>
+          <li><a href="/appointments">Appointments</a></li>
+          <li><a href="/bills">Bills</a></li>
+          <li><a href="/payments">Payments</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h2>Appointments List</h2>
+
+      <form action="/appointments/add" method="POST">
+        <h3>Schedule New Appointment</h3>
+        <input
+          type="text"
+          name="patientName"
+          placeholder="Patient Name"
+          required
+        />
+        <input
+          type="text"
+          name="doctorName"
+          placeholder="Doctor Name"
+          required
+        />
+        <input
+          type="date"
+          name="appointmentDate"
+          placeholder="Appointment Date"
+          required
+        />
+        <textarea name="notes" placeholder="Notes" rows="4"></textarea>
+        <input type="submit" value="Add Appointment" />
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Patient Name</th>
+            <th>Doctor Name</th>
+            <th>Appointment Date</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% appointments.forEach(appointment => { %>
+          <tr>
+            <td><%= appointment.AppointmentID %></td>
+            <td><%= appointment.PatientName %></td>
+            <td><%= appointment.DoctorName %></td>
+            <td><%= appointment.AppointmentDate %></td>
+            <td><%= appointment.Notes %></td>
+            <td>
+              <a href="/appointments/edit/<%= appointment.AppointmentID %>">
+                <button>Edit</button>
+              </a>
+              <a href="/appointments/delete/<%= appointment.AppointmentID %>">
+                <button>Delete</button>
+              </a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

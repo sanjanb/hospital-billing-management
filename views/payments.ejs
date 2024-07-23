@@ -1,83 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Manage Payments</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payments - Hospital Billing System</title>
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <h1>Manage Payments</h1>
-    <form action="/payments/add" method="POST">
-      <input type="text" name="billId" placeholder="Bill ID" required />
-      <input type="date" name="paymentDate" required />
-      <input
-        type="number"
-        step="0.01"
-        name="amountPaid"
-        placeholder="Amount Paid"
-        required
-      />
-      <input
-        type="text"
-        name="paymentMethod"
-        placeholder="Payment Method"
-        required
-      />
-      <button type="submit">Add Payment</button>
-    </form>
-    <table>
-      <thead>
-        <tr>
-          <th>Bill ID</th>
-          <th>Payment Date</th>
-          <th>Amount Paid</th>
-          <th>Payment Method</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% payments.forEach(payment => { %>
-        <tr>
-          <td><%= payment.BillID %></td>
-          <td><%= payment.PaymentDate %></td>
-          <td><%= payment.AmountPaid %></td>
-          <td><%= payment.PaymentMethod %></td>
-          <td>
-            <form
-              action="/payments/edit/<%= payment.PaymentID %>"
-              method="POST"
-              style="display: inline"
-            >
-              <input
-                type="text"
-                name="billId"
-                value="<%= payment.BillID %>"
-                required
-              />
-              <input
-                type="date"
-                name="paymentDate"
-                value="<%= payment.PaymentDate %>"
-                required
-              />
-              <input
-                type="number"
-                step="0.01"
-                name="amountPaid"
-                value="<%= payment.AmountPaid %>"
-                required
-              />
-              <input
-                type="text"
-                name="paymentMethod"
-                value="<%= payment.PaymentMethod %>"
-                required
-              />
-              <button type="submit">Edit</button>
-            </form>
-            <a href="/payments/delete/<%= payment.PaymentID %>">Delete</a>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
+    <header>
+      <h1>Hospital Billing System</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/patients">Patients</a></li>
+          <li><a href="/doctors">Doctors</a></li>
+          <li><a href="/appointments">Appointments</a></li>
+          <li><a href="/bills">Bills</a></li>
+          <li><a href="/payments">Payments</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h2>Payments List</h2>
+
+      <form action="/payments/add" method="POST">
+        <h3>Add New Payment</h3>
+        <input
+          type="text"
+          name="patientName"
+          placeholder="Patient Name"
+          required
+        />
+        <input
+          type="number"
+          name="amount"
+          placeholder="Amount"
+          step="0.01"
+          required
+        />
+        <input
+          type="text"
+          name="method"
+          placeholder="Payment Method"
+          required
+        />
+        <textarea name="notes" placeholder="Notes" rows="4"></textarea>
+        <input type="submit" value="Add Payment" />
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Patient Name</th>
+            <th>Amount</th>
+            <th>Payment Method</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% payments.forEach(payment => { %>
+          <tr>
+            <td><%= payment.PaymentID %></td>
+            <td><%= payment.PatientName %></td>
+            <td><%= payment.Amount %></td>
+            <td><%= payment.Method %></td>
+            <td><%= payment.Notes %></td>
+            <td>
+              <a href="/payments/edit/<%= payment.PaymentID %>">
+                <button>Edit</button>
+              </a>
+              <a href="/payments/delete/<%= payment.PaymentID %>">
+                <button>Delete</button>
+              </a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
