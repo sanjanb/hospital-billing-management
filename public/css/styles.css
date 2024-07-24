@@ -1010,3 +1010,57 @@ textarea {
 textarea {
   resize: vertical;
 }
+
+/* Contact Form Styles */
+.contact-form {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.contact-form label {
+  display: block;
+  margin: 0.5rem 0;
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form .btn-primary {
+  background-color: #1abc9c;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.contact-form .btn-primary:hover {
+  background-color: #16a085;
+}
+
+.success-message {
+  color: #1abc9c;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}

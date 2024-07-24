@@ -16,6 +16,7 @@ const doctorsRouter = require("./routes/doctors");
 const appointmentsRouter = require("./routes/appointments");
 const billsRouter = require("./routes/bills");
 const paymentsRouter = require("./routes/payments");
+const contactRouter = require("./routes/contact");
 
 app.use("/", indexRouter);
 app.use("/patients", patientsRouter);
@@ -23,6 +24,7 @@ app.use("/doctors", doctorsRouter);
 app.use("/appointments", appointmentsRouter);
 app.use("/bills", billsRouter);
 app.use("/payments", paymentsRouter);
+app.use("/contact", contactRouter); // Add this line
 
 // Start server
 const PORT = process.env.PORT || 3000;
