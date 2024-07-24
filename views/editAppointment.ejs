@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Appointment</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Edit Appointment</h1>
+    </header>
+    <div class="container">
+      <form
+        action="/appointments/edit/<%= appointment.AppointmentID %>"
+        method="post"
+      >
+        <label for="patientID">Patient ID:</label>
+        <input
+          type="number"
+          id="patientID"
+          name="patientID"
+          value="<%= appointment.PatientID %>"
+          required
+        />
+
+        <label for="doctorID">Doctor ID:</label>
+        <input
+          type="number"
+          id="doctorID"
+          name="doctorID"
+          value="<%= appointment.DoctorID %>"
+          required
+        />
+
+        <label for="appointmentDate">Appointment Date:</label>
+        <input
+          type="datetime-local"
+          id="appointmentDate"
+          name="appointmentDate"
+          value="<%= new Date(appointment.AppointmentDate).toISOString().substring(0, 16) %>"
+          required
+        />
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required>
+<%= appointment.Description %></textarea
+        >
+
+        <button type="submit">Update Appointment</button>
+      </form>
+    </div>
+  </body>
+</html>

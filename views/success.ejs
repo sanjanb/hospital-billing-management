@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us - Hospital Billing System</title>
+    <title>Message Sent</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
@@ -21,30 +21,14 @@
         </ul>
       </nav>
     </header>
-
     <div class="container">
-      <section class="contact-form">
-        <h2>Contact Us</h2>
-        <% if (success) { %>
-        <p class="success-message">
-          Your message has been sent successfully. Thank you!
-        </p>
-        <% } %>
-        <form action="/contact/submit" method="POST">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required />
-
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="4" required></textarea>
-
-          <button type="submit" class="btn-primary">Send Message</button>
-        </form>
-      </section>
+      <h2>Message Sent</h2>
+      <p>
+        Your message has been sent successfully. Thank you for reaching out to
+        us!
+      </p>
+      <a href="/contact" class="btn-primary">Back to Contact</a>
     </div>
-
     <footer>
       <p>&copy; 2024 Hospital Billing System. All rights reserved.</p>
     </footer>

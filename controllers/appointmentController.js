@@ -1,49 +1,85 @@
 const db = require("../db/db");
 
-// Get all appointments
 exports.getAllAppointments = (req, res) => {
-  let sql = "SELECT * FROM Appointment";
-  db.query(sql, (err, results) => {
-    if (err) throw err;
-    res.render("appointments", { appointments: results });
+  const query = "SELECT * FROM appointment";
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching appointments:", err);
+      res.status(500).send("Internal Server Error");
+    } else {
+      res.render("appointments", { appointments: results });
+    }
   });
 };
 
-// Add an appointment
+exports.showAddForm = (req, res) => {
+  res.render("addAppointment");
+};
+
 exports.addAppointment = (req, res) => {
-  let sql = "INSERT INTO Appointment SET ?";
-  let newAppointment = {
-    PatientID: req.body.patientId,
-    DoctorID: req.body.doctorId,
-    AppointmentDate: req.body.appointmentDate,
-    Reason: req.body.reason,
-  };
-  db.query(sql, newAppointment, (err, result) => {
-    if (err) throw err;
-    res.redirect("/appointments");
+  const { patientName, doctorName, date } = req.body;
+  const query =
+    "INSERT INTO appointment (PatientName, DoctorName, Date) VALUES (?, ?, ?)";
+  db.query(query, [patientName, doctorName, date], (err, result) => {
+    if (err) {
+      console.error("Error adding appointment:", err);
+      res.status(500).send("Internal Server Error");
+    } else {
+      res.redirect("/appointments");
+    }
   });
 };
 
-// Edit an appointment
-exports.editAppointment = (req, res) => {
-  let sql = "UPDATE Appointment SET ? WHERE AppointmentID = ?";
-  let updatedAppointment = {
-    PatientID: req.body.patientId,
-    DoctorID: req.body.doctorId,
-    AppointmentDate: req.body.appointmentDate,
-    Reason: req.body.reason,
-  };
-  db.query(sql, [updatedAppointment, req.params.id], (err, result) => {
-    if (err) throw err;
-    res.redirect("/appointments");
+exports.showEditForm = (req, res) => {
+  const appointmentID = req.params.id;
+  const query = "SELECT * FROM appointment WHERE AppointmentID = ?";
+  db.query(query, [appointmentID], (err, result) => {
+    if (err) {
+      console.error("Error fetching appointment:", err);
+      res.status(500).send("Internal Server Error");
+    } else {
+      res.render("editAppointment", { appointment: result[0] });
+    }
   });
 };
 
-// Delete an appointment
+exports.updateAppointment = (req, res) => {
+  const appointmentID = req.params.id;
+  const { patientName, doctorName, date } = req.body;
+  const query =
+    "UPDATE appointment SET PatientName = ?, DoctorName = ?, Date = ? WHERE AppointmentID = ?";
+  db.query(
+    query,
+    [patientName, doctorName, date, appointmentID],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating appointment:", err);
+        res.status(500).send("Internal Server Error");
+      } else {
+        res.redirect("/appointments");
+      }
+    }
+  );
+};
+
 exports.deleteAppointment = (req, res) => {
-  let sql = "DELETE FROM Appointment WHERE AppointmentID = ?";
-  db.query(sql, [req.params.id], (err, result) => {
-    if (err) throw err;
-    res.redirect("/appointments");
+  const appointmentID = req.params.id;
+  const deleteBillQuery = "DELETE FROM bill WHERE AppointmentID = ?";
+  db.query(deleteBillQuery, [appointmentID], (err, result) => {
+    if (err) {
+      console.error("Error deleting related bills:", err);
+      res.status(500).send("Internal Server Error");
+    } else {
+      const deleteAppointmentQuery =
+        "DELETE FROM appointment WHERE AppointmentID = ?";
+      db.query(deleteAppointmentQuery, [appointmentID], (err, result) => {
+        if (err) {
+          console.error("Error deleting appointment:", err);
+          res.status(500).send("Internal Server Error");
+        } else {
+          res.redirect("/appointments");
+        }
+      });
+    }
   });
 };
