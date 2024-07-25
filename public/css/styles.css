@@ -1169,7 +1169,7 @@ body {
 }
 
 header {
-  background-color: #007bff;
+  background-color: #3498db;
   color: white;
   padding: 15px 20px;
   text-align: center;
@@ -1229,9 +1229,9 @@ button:hover {
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #3498db;
   color: white;
-  position: fixed;
+  position: relative;
   width: 100%;
   bottom: 0;
 }

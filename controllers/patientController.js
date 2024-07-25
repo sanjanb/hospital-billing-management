@@ -11,7 +11,7 @@ exports.getAllPatients = (req, res) => {
 exports.addPatient = (req, res) => {
   let sql = "INSERT INTO Patient SET ?";
   let newPatient = {
-    Name: req.body.name,
+    PatientName: req.body.name, // Updated to PatientName
     Age: req.body.age,
     Gender: req.body.gender,
     Address: req.body.address,
@@ -26,7 +26,7 @@ exports.addPatient = (req, res) => {
 exports.editPatient = (req, res) => {
   let sql = "UPDATE Patient SET ? WHERE PatientID = ?";
   let updatedPatient = {
-    Name: req.body.name,
+    PatientName: req.body.name, // Updated to PatientName
     Age: req.body.age,
     Gender: req.body.gender,
     Address: req.body.address,

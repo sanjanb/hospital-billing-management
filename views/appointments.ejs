@@ -27,24 +27,19 @@
       <form action="/appointments/add" method="POST">
         <h3>Schedule New Appointment</h3>
         <input
-          type="text"
-          name="patientName"
-          placeholder="Patient Name"
+          type="number"
+          name="patientID"
+          placeholder="Patient ID"
           required
         />
-        <input
-          type="text"
-          name="doctorName"
-          placeholder="Doctor Name"
-          required
-        />
+        <input type="number" name="doctorID" placeholder="Doctor ID" required />
         <input
           type="date"
           name="appointmentDate"
           placeholder="Appointment Date"
           required
         />
-        <textarea name="notes" placeholder="Notes" rows="4"></textarea>
+        <textarea name="reason" placeholder="Reason" rows="4"></textarea>
         <input type="submit" value="Add Appointment" />
       </form>
 

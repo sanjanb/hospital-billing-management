@@ -13,7 +13,7 @@ exports.getAllDoctors = (req, res) => {
 exports.addDoctor = (req, res) => {
   let sql = "INSERT INTO Doctor SET ?";
   let newDoctor = {
-    Name: req.body.name,
+    DoctorName: req.body.name, // Updated to DoctorName
     Specialty: req.body.specialty,
     ContactNumber: req.body.contactNumber,
   };
@@ -27,7 +27,7 @@ exports.addDoctor = (req, res) => {
 exports.editDoctor = (req, res) => {
   let sql = "UPDATE Doctor SET ? WHERE DoctorID = ?";
   let updatedDoctor = {
-    Name: req.body.name,
+    DoctorName: req.body.name, // Updated to DoctorName
     Specialty: req.body.specialty,
     ContactNumber: req.body.contactNumber,
   };
