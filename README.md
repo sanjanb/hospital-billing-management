@@ -1,7 +1,3 @@
-Here's a sample README file for your Hospital Management System project:
-
----
-
 # Hospital Management System
 
 ## Description
@@ -17,7 +13,7 @@ A web application designed to manage hospital operations, including patient regi
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone 
+   git clone https://github.com/sanjanb/hospital-billing-management.git
    ```
 2. Navigate to the project directory:
    ```bash
